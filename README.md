@@ -1,2 +1,138 @@
-# retail-analytics-powerbi
-Dashboard ejecutivo Power BI · Retail Analytics · Modelo estrella + DAX + RLS
+# 🏪 Retail Analytics — Dashboard Ejecutivo Power BI
+
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![DAX](https://img.shields.io/badge/DAX-Advanced-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Completado-green?style=for-the-badge)
+
+## 📌 Descripción
+
+Dashboard ejecutivo retail construido en Power BI como proyecto de portafolio 
+para la certificación **Microsoft PL-300 Power BI Data Analyst**.
+
+Analiza ~10,000 transacciones de una cadena retail (2014–2017) respondiendo 
+preguntas críticas de negocio sobre ventas, rentabilidad y comportamiento de clientes.
+
+---
+
+## 🖼️ Vista previa
+
+### Resumen Ejecutivo
+![Resumen Ejecutivo](screenshots/01_resumen_ejecutivo.png)
+
+### Análisis de Ventas
+![Análisis de Ventas](screenshots/02_analisis_ventas.png)
+
+### Análisis de Clientes
+![Análisis de Clientes](screenshots/03_analisis_clientes.png)
+
+---
+
+## 🎯 Preguntas de negocio respondidas
+
+- ¿Cuánto vendimos y cuánto ganamos realmente?
+- ¿Estamos creciendo respecto al año anterior?
+- ¿Qué categorías y productos tienen margen negativo?
+- ¿Qué clientes generan pérdidas a pesar de comprar mucho?
+- ¿El descuento está destruyendo nuestra rentabilidad?
+
+---
+
+## 🏗️ Arquitectura técnica
+
+| Capa | Detalle |
+|---|---|
+| Fuente de datos | Kaggle Superstore Dataset · 9,994 filas |
+| Transformación | Power Query · limpieza · columnas calculadas |
+| Modelado | Modelo estrella · 1 tabla hechos + 4 dimensiones |
+| Cálculo | DAX avanzado · 12 medidas · time intelligence |
+| Seguridad | Row Level Security · 3 roles por región |
+| Visualización | 3 páginas · bookmarks · slicers sincronizados |
+
+---
+
+## 📊 Modelo de datos
+DimCliente ──────┐
+DimProducto ─────┤──► FactVentas (9,994 filas)
+DimRegion ───────┤
+DimCalendario ───┘
+---
+
+## 🔑 Medidas DAX destacadas
+
+```dax
+-- Crecimiento año sobre año
+Crecimiento YoY % = 
+DIVIDE(
+    [Ventas Totales] - [Ventas Año Anterior],
+    [Ventas Año Anterior],
+    0
+)
+
+-- Promedio móvil 3 meses
+Promedio Móvil 3M = 
+AVERAGEX(
+    DATESINPERIOD(
+        DimCalendario[Date],
+        LASTDATE(DimCalendario[Date]),
+        -3, MONTH
+    ),
+    [Ventas Totales]
+)
+```
+
+---
+
+## 💎 Hallazgos clave
+
+> 📉 **Furniture tiene margen crítico del 2.49%** — Tables (-8.56%) y 
+> Bookcases (-3.02%) generan pérdidas activas
+
+> ⚠️ **Descuentos sobre 40% destruyen rentabilidad** en el 78% de los casos
+
+> 🔴 **638 registros de clientes con pérdida neta** — impactan directamente 
+> el margen del negocio
+
+> ✅ **Technology lidera con 17.4% de margen** — Copiers al 37.2%
+
+> 📈 **Crecimiento YoY del 46.88%** impulsado por Q4
+
+---
+
+## 🔐 Row Level Security
+
+| Rol | Acceso |
+|---|---|
+| Gerente_Norte | Solo región Central |
+| Gerente_Sur | Solo región South |
+| Gerente_Oeste | Solo región West |
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- Microsoft Power BI Desktop
+- DAX (Data Analysis Expressions)
+- Power Query (M Language)
+- Dataset: Kaggle Superstore Sales
+
+---
+
+## 👤 Autor
+
+**Pablo** · Analista de Datos  
+📜 Certificación: Microsoft PL-300 Power BI Data Analyst  
+🔗 LinkedIn: [tu-linkedin]
+
+---
+
+## 📁 Estructura del repositorio
+retail-analytics-powerbi/
+├── data/
+│   └── superstore.csv
+├── pbix/
+│   └── RetailAnalytics.pbix
+├── screenshots/
+│   ├── 01_resumen_ejecutivo.png
+│   ├── 02_analisis_ventas.png
+│   └── 03_analisis_clientes.png
+└── README.md

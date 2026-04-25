@@ -127,8 +127,8 @@ AVERAGEX(
 ## 👤 Autor
 
 **Pablo** · Analista de Datos  
-📜 Certificación: Microsoft PL-300 Power BI Data Analyst  
-🔗 LinkedIn: [tu-linkedin]
+📜 Certificación: Coursera Microsoft PL-300 Power BI Data Analyst  
+🔗 LinkedIn: [https://www.linkedin.com/in/ppareja/]
 
 ---
 

@@ -50,11 +50,18 @@ preguntas críticas de negocio sobre ventas, rentabilidad y comportamiento de cl
 
 ---
 
-## 📊 Modelo de datos
-DimCliente ──────┐
-DimProducto ─────┤──► FactVentas (9,994 filas)
-DimRegion ───────┤
-DimCalendario ───┘
+## 🗂️ Modelo de datos
+
+| Tabla | Tipo | Conecta con |
+|---|---|---|
+| FactVentas | Tabla de hechos | DimCliente, DimProducto, DimRegion, DimCalendario |
+| DimCliente | Dimensión | FactVentas |
+| DimProducto | Dimensión | FactVentas |
+| DimRegion | Dimensión | FactVentas |
+| DimCalendario | Dimensión | FactVentas |
+
+> Diseño en estrella con filtros unidireccionales — las dimensiones filtran hacia FactVentas.
+
 ---
 
 ## 🔑 Medidas DAX destacadas
@@ -126,13 +133,12 @@ AVERAGEX(
 ---
 
 ## 📁 Estructura del repositorio
-retail-analytics-powerbi/
-├── data/
-│   └── superstore.csv
-├── pbix/
-│   └── RetailAnalytics.pbix
-├── screenshots/
-│   ├── 01_resumen_ejecutivo.png
-│   ├── 02_analisis_ventas.png
-│   └── 03_analisis_clientes.png
-└── README.md
+
+| Carpeta | Archivo | Descripción |
+|---|---|---|
+| `data/` | `superstore.csv` | Dataset original Kaggle Superstore |
+| `pbix/` | `RetailAnalytics.pbix` | Archivo Power BI Desktop |
+| `screenshots/` | `01_resumen_ejecutivo.png` | Captura Página 1 |
+| `screenshots/` | `02_analisis_ventas.png` | Captura Página 2 |
+| `screenshots/` | `03_analisis_clientes.png` | Captura Página 3 |
+| `/` | `README.md` | Documentación del proyecto |
